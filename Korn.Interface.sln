@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Interface", "Korn.Inte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Korn", "Korn", "{79D19D1F-5A3D-4D69-A982-35453809848C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Shared.Internal", "..\Korn.Shared\Korn.Shared.Internal\Korn.Shared.Internal.csproj", "{188E4B98-6BB1-4056-BF6B-03798B62F9F1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Shared", "..\Korn.Shared\Korn.Shared\Korn.Shared.csproj", "{DB2C8BF1-B9A8-4ACC-A28D-3E16667CDE89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Logger", "..\Korn.Logger\Korn.Logger\Korn.Logger.csproj", "{34CB0F49-1B5E-44E5-9037-E715322B8230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Korn.Shared.Internal", "..\Korn.Shared.Internal\Korn.Shared.Internal\Korn.Shared.Internal.csproj", "{A3170DE4-6115-4761-BBF0-AB8869C67432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{AE635FD4-CBD6-4650-8185-E25320EFFAE1}.Debug|x64.Build.0 = Debug|x64
 		{AE635FD4-CBD6-4650-8185-E25320EFFAE1}.Release|x64.ActiveCfg = Release|x64
 		{AE635FD4-CBD6-4650-8185-E25320EFFAE1}.Release|x64.Build.0 = Release|x64
-		{188E4B98-6BB1-4056-BF6B-03798B62F9F1}.Debug|x64.ActiveCfg = Debug|x64
-		{188E4B98-6BB1-4056-BF6B-03798B62F9F1}.Debug|x64.Build.0 = Debug|x64
-		{188E4B98-6BB1-4056-BF6B-03798B62F9F1}.Release|x64.ActiveCfg = Release|x64
-		{188E4B98-6BB1-4056-BF6B-03798B62F9F1}.Release|x64.Build.0 = Release|x64
 		{DB2C8BF1-B9A8-4ACC-A28D-3E16667CDE89}.Debug|x64.ActiveCfg = Debug|x64
 		{DB2C8BF1-B9A8-4ACC-A28D-3E16667CDE89}.Debug|x64.Build.0 = Debug|x64
 		{DB2C8BF1-B9A8-4ACC-A28D-3E16667CDE89}.Release|x64.ActiveCfg = Release|x64
@@ -35,13 +31,17 @@ Global
 		{34CB0F49-1B5E-44E5-9037-E715322B8230}.Debug|x64.Build.0 = Debug|x64
 		{34CB0F49-1B5E-44E5-9037-E715322B8230}.Release|x64.ActiveCfg = Release|x64
 		{34CB0F49-1B5E-44E5-9037-E715322B8230}.Release|x64.Build.0 = Release|x64
+		{A3170DE4-6115-4761-BBF0-AB8869C67432}.Debug|x64.ActiveCfg = Debug|x64
+		{A3170DE4-6115-4761-BBF0-AB8869C67432}.Debug|x64.Build.0 = Debug|x64
+		{A3170DE4-6115-4761-BBF0-AB8869C67432}.Release|x64.ActiveCfg = Release|x64
+		{A3170DE4-6115-4761-BBF0-AB8869C67432}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{188E4B98-6BB1-4056-BF6B-03798B62F9F1} = {79D19D1F-5A3D-4D69-A982-35453809848C}
 		{DB2C8BF1-B9A8-4ACC-A28D-3E16667CDE89} = {79D19D1F-5A3D-4D69-A982-35453809848C}
 		{34CB0F49-1B5E-44E5-9037-E715322B8230} = {79D19D1F-5A3D-4D69-A982-35453809848C}
+		{A3170DE4-6115-4761-BBF0-AB8869C67432} = {79D19D1F-5A3D-4D69-A982-35453809848C}
 	EndGlobalSection
 EndGlobal

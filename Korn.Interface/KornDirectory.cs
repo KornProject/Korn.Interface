@@ -1,4 +1,5 @@
-﻿using Korn.Shared.Internal;
+﻿using Korn.Interface.ServiceModule;
+using Korn.Shared.Internal;
 using System.Collections.Generic;
 
 namespace Korn.Interface 
