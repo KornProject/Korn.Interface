@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using Korn.Shared.Internal;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 
 namespace Korn.Interface.ServiceModule
 {
     public static class Plugins
     {
         public static readonly string
-            PluginsListFile = Path.Combine(Service.RootDirectory, "plugins.txt"),
+            //PluginsListFile = Path.Combine(Service.RootDirectory, "plugins.txt"),
             PluginsDirectory = Path.Combine(Service.RootDirectory, "Plugins");
 
         public const string PluginManifestFileName = "plugin.manifest";
+        public const string PluginVersionFileName = "plugin.version";
+        public const string PluginLogFileName = "plugin.log";
 
-        public static PluginDirectoryInfo GetDirectoryForPlugin(string name) => new PluginDirectoryInfo(Path.Combine(PluginsDirectory, name));
-        public static PluginsList DeserializePluginsList() => PluginsList.Deserialize(File.ReadAllText(PluginsListFile));
-
-        public static void Save(this PluginsList self) => File.WriteAllText(PluginsListFile, self.Serialize());
+        public static PluginDirectoryInfo GetDirectoryInfo(string name) => new PluginDirectoryInfo(Path.Combine(PluginsDirectory, name));
+        public static string[] GetPluginsNames() => Directory.GetDirectories(PluginsDirectory).Select(Path.GetFileName).ToArray();
     }
 
     public class PluginDirectoryInfo
@@ -25,13 +24,18 @@ namespace Korn.Interface.ServiceModule
 
         public readonly string RootDirectory;
         public string ManifestFilePath => Path.Combine(RootDirectory, Plugins.PluginManifestFileName);
-        public string DataDirectory => Path.Combine(RootDirectory, "Data");
+        public string VersionFilePath => Path.Combine(RootDirectory, Plugins.PluginVersionFileName);
+        public string LogFilePath => Path.Combine(RootDirectory, Plugins.PluginLogFileName);
         public string BinariesDirectory => Path.Combine(RootDirectory, "bin");
 
         public PluginManifest DeserializeManifest() => PluginManifest.Deserialize(ManifestFilePath);
 
+        public string GetVersion() => HasVersionFile ? File.ReadAllText(VersionFilePath) : "0";
+        public void SetVersion(string version) => File.WriteAllText(VersionFilePath, version);
+            
         public bool IsDirectoryExists => Directory.Exists(RootDirectory);
         public bool HasManifestFile => File.Exists(ManifestFilePath);
+        public bool HasVersionFile => File.Exists(VersionFilePath);
     }
 
     public class PluginManifest
@@ -53,7 +57,7 @@ namespace Korn.Interface.ServiceModule
                 Targets.Length == 0
             );
 
-        public static PluginManifest Deserialize(string path) => JsonConvert.DeserializeObject<PluginManifest>(path);
+        public static PluginManifest Deserialize(string path) => JsonConvert.DeserializeObject<PluginManifest>(File.ReadAllText(path));
     }
 
     public class PluginAuthor
@@ -77,28 +81,7 @@ namespace Korn.Interface.ServiceModule
 
     public enum PluginFrameworkTarget
     {
-        Net472,
-        Net8
-    }
-
-    public class PluginsList
-    {
-        public List<GithubPlugin> OfficialPlugins;
-        public List<LocalPlugin> LocalPlugins;
-
-        public string Serialize() => JsonConvert.SerializeObject(this, KornSharedInternal.JsonSettings); 
-
-        public static PluginsList Deserialize(string path) => JsonConvert.DeserializeObject<PluginsList>(path);
-
-        public class GithubPlugin
-        {
-            public string Name;
-            public string GithubRepository;
-        }
-
-        public class LocalPlugin
-        {
-            public string Name;
-        }
+        net472,
+        net8
     }
 }

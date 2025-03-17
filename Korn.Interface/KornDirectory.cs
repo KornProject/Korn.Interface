@@ -6,16 +6,16 @@ namespace Korn.Interface
 {
     public static class KornDirectory
     {
-        public static readonly string RootDirectory = KornSharedInternal.RootDirectory;
+        public const string RootDirectory = KornSharedInternal.RootDirectory,
+            LogFile = RootDirectory + "\\" + "log.txt";
 
         public static IEnumerable<string> GetAllDirectories()
         {
             var entries = new string[][]
             {
+                Service.Diretories,
                 AutorunService.Diretories,
                 Bootstrapper.Diretories,
-                Service.Diretories,
-                SharedData.Directories
             };
 
             yield return RootDirectory;

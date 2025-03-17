@@ -7,9 +7,14 @@ namespace Korn.Interface.ServiceModule
 {
     public static class Libraries
     {
-        public static readonly string
-            LibrariesListFile = Path.Combine(Service.RootDirectory, "libraries.txt"),
-            LibrariesDirectory = Path.Combine(Service.RootDirectory, "Libraries");
+        public const string
+            LibrariesListFile = Service.RootDirectory + "\\" + "libraries.txt",
+            LibrariesDirectory = Service.RootDirectory + "\\" + "Libraries",
+                LibrariesNet8Directory = LibrariesDirectory + "\\" + KornSharedInternal.Net8TargetVersion,
+                LibrariesNet472Directory = LibrariesDirectory + "\\" + KornSharedInternal.Net472TargetVersion;
+
+        public static LibrariesList DeserializeLibrariesList() => LibrariesList.Deserialize(File.ReadAllText(LibrariesListFile));
+        public static bool HasLibrariesList() => File.Exists(LibrariesListFile);
 
         public static void Save(this LibrariesList self) => File.WriteAllText(LibrariesListFile, self.Serialize());
 
@@ -22,6 +27,7 @@ namespace Korn.Interface.ServiceModule
             "Korn.Shared",
             "Korn.Shared.Internal",
             "Korn.Utils.Assembler",
+            "Korn.Utils.Algorithms",
             "Korn.Utils.GithubExplorer",
             "Korn.Utils.Memory",
             "Korn.Utils.PDBResolver",
@@ -34,6 +40,11 @@ namespace Korn.Interface.ServiceModule
 
     public class LibrariesList
     {
+        public LibrariesList()
+        {
+            Libraries = new List<Library>();
+        }
+
         public List<Library> Libraries;
 
         public string Serialize() => JsonConvert.SerializeObject(this, KornSharedInternal.JsonSettings);
@@ -43,7 +54,8 @@ namespace Korn.Interface.ServiceModule
         public class Library
         {
             public string Name;
-            public string CurrentEntrySha;
+            public string TargetVersion;
+            public string CurrentEntrySha; // rename to "Sha"
             public string LocalFilePath; // null if don't use local file
         }
     }
