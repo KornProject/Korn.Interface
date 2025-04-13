@@ -3,13 +3,13 @@ using Korn.Shared.Internal;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace Korn.Interface.ServiceModule 
+namespace Korn.Interface 
 {
     public static class Libraries
     {
         public const string
-            LibrariesListFile = Service.RootDirectory + "\\" + "libraries.txt",
-            LibrariesDirectory = Service.RootDirectory + "\\" + "Libraries",
+            LibrariesListFile = InjectorService.RootDirectory + "\\" + "libraries.txt",
+            LibrariesDirectory = InjectorService.RootDirectory + "\\" + "Libraries",
                 LibrariesNet8Directory = LibrariesDirectory + "\\" + KornSharedInternal.Net8TargetVersion,
                 LibrariesNet472Directory = LibrariesDirectory + "\\" + KornSharedInternal.Net472TargetVersion;
 
@@ -36,14 +36,18 @@ namespace Korn.Interface.ServiceModule
             "Korn.Utils.VisualStudio",
             "Korn.Utils.WinForms"
         };
+
+        public static readonly NugetPackage[] NugetPackages = new NugetPackage[]
+        {
+            new NugetPackage("Newtonsoft.Json", "net6.0"),
+            new NugetPackage("Newtonsoft.Json.Bson", "net45")
+
+        };
     }
 
     public class LibrariesList
     {
-        public LibrariesList()
-        {
-            Libraries = new List<Library>();
-        }
+        public LibrariesList() => Libraries = new List<Library>();
 
         public List<Library> Libraries;
 
@@ -55,8 +59,16 @@ namespace Korn.Interface.ServiceModule
         {
             public string Name;
             public string TargetVersion;
-            public string CurrentEntrySha; // rename to "Sha"
-            public string LocalFilePath; // null if don't use local file
+            public string Sha;
+            public string LocalFilePath;
         }
+    }
+
+    public class NugetPackage
+    {
+        public NugetPackage(string name, string targetVersion) => (Name, TargetVersion) = (name, targetVersion);
+
+        public string Name;
+        public string TargetVersion;
     }
 }

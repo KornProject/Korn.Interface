@@ -1,5 +1,4 @@
-﻿using Korn.Interface.ServiceModule;
-using Korn.Shared.Internal;
+﻿using Korn.Shared.Internal;
 using System.Collections.Generic;
 
 namespace Korn.Interface 
@@ -9,19 +8,6 @@ namespace Korn.Interface
         public const string RootDirectory = KornSharedInternal.RootDirectory,
             LogFile = RootDirectory + "\\" + "log.txt";
 
-        public static IEnumerable<string> GetAllDirectories()
-        {
-            var entries = new string[][]
-            {
-                Service.Diretories,
-                AutorunService.Diretories,
-                Bootstrapper.Diretories,
-            };
-
-            yield return RootDirectory;
-            foreach (var entry in entries)
-                foreach (var directory in entry)
-                    yield return directory;
-        }
+        public static IEnumerable<string> GetAllDirectories() => DirectoryEnumeration.Enumerate(RootDirectory, ServiceHub.Directories, Bootstrapper.Directories);
     }
 }

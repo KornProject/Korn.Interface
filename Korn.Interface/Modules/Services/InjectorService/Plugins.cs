@@ -2,13 +2,13 @@
 using System.IO;
 using System.Linq;
 
-namespace Korn.Interface.ServiceModule
+namespace Korn.Interface
 {
     public static class Plugins
     {
         public static readonly string
             //PluginsListFile = Path.Combine(Service.RootDirectory, "plugins.txt"),
-            PluginsDirectory = Path.Combine(Service.RootDirectory, "Plugins");
+            PluginsDirectory = InjectorService.RootDirectory + "\\" + "Plugins";
 
         public const string PluginManifestFileName = "plugin.manifest";
         public const string PluginVersionFileName = "plugin.version";
@@ -38,6 +38,7 @@ namespace Korn.Interface.ServiceModule
         public bool HasVersionFile => File.Exists(VersionFilePath);
     }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public class PluginManifest
     {
         public string Name;
@@ -84,4 +85,5 @@ namespace Korn.Interface.ServiceModule
         net472,
         net8
     }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 }
