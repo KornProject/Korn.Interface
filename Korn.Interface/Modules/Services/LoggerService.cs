@@ -9,6 +9,7 @@ namespace Korn.Interface
 
         public const string RootDirectory = Services.LoggerServiceDirectory,
             VersionFile = RootDirectory + "\\" + "version.gittime",
+            LogFile = RootDirectory + "\\" + "log.txt",
             BinDirectory = RootDirectory + "\\" + "bin",
                 BinNet8Directory = BinDirectory + "\\" + KornSharedInternal.Net8TargetVersion,
                     ExecutableFile = BinNet8Directory + "\\" + ProcessName + ".exe";
@@ -17,7 +18,8 @@ namespace Korn.Interface
 
         public static readonly GithubEntry GithubEntry = new GithubEntry
         (
-            "Binaries/Services/Logger",
+            "Services.Logger",
+            "Binaries/Services/Logger/" + KornSharedInternal.Net8TargetVersion,
             BinNet8Directory,
             VersionFile,
             VersionableFileName

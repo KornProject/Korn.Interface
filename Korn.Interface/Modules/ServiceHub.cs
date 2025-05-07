@@ -1,5 +1,5 @@
-﻿using Korn.Shared.Internal;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Korn.Shared.Internal;
 
 namespace Korn.Interface
 {
@@ -20,12 +20,13 @@ namespace Korn.Interface
 
         public static readonly GithubEntry GithubEntry = new GithubEntry
         (
-            "Binaries/ServiceHub/",
+            "ServiceHub",
+            "Binaries/ServiceHub/" + KornSharedInternal.Net472TargetVersion,
             BinNet472Diretory,
             VersionFile,
             VersionableFileName
         );
 
-        public static IEnumerable<string> GetAllDirectories() => DirectoryEnumeration.Enumerate(RootDirectory, Directories);
+        public static IEnumerable<string> GetAllDirectories() => DirectoryEnumeration.Enumerate(RootDirectory, Directories, Services.GetAllDirectories(), Plugins.GetAllDirectories());
     }
 }

@@ -4,7 +4,9 @@ namespace Korn.Interface
 {
     public static class Bootstrapper
     {
-        public const string VersionableFileName = "Korn.Bootstrapper.exe";
+        public const string 
+            ExecutableFileName = "Korn.Bootstrapper.exe",
+            VersionableFileName = ExecutableFileName;
 
         public const string
             RootDirectory = KornDirectory.RootDirectory + "\\" + "Bootstapper",
@@ -20,6 +22,7 @@ namespace Korn.Interface
 
         public static readonly GithubEntry GithubNet8Entry = new GithubEntry
         (
+            "Bootstrapper.net8",
             "Binaries/Bootstrapper/" + KornSharedInternal.Net8TargetVersion,
             BinNet8Directory,
             Net8VersionFile,
@@ -28,6 +31,7 @@ namespace Korn.Interface
 
         public static readonly GithubEntry GithubNet472Entry = new GithubEntry
         (
+            "Bootstrapper.net472",
             "Binaries/Bootstrapper/" + KornSharedInternal.Net472TargetVersion,
             BinNet472Directory,
             Net472VersionFile,

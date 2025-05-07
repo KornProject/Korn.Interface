@@ -2,9 +2,9 @@
 {
     public class GithubEntry
     {
-        public GithubEntry(string githubPath, string directoryPath, string versionFilePath, string versionableFileName)
-            => (GithubPath, DirectoryPath, VersionFilePath, VersionableFileName) = (githubPath, directoryPath, versionFilePath, versionableFileName);
+        public GithubEntry(string name, string githubPath, string directoryPath, string versionFilePath, string versionableFileName)
+            => (Name, GithubPath, DirectoryPath, VersionFilePath, VersionableFileName) = (name, githubPath, directoryPath, versionFilePath, versionableFileName);
 
-        public readonly string GithubPath, DirectoryPath, VersionFilePath, VersionableFileName;
+        public readonly string Name, GithubPath, DirectoryPath, VersionFilePath, VersionableFileName;
     }
 }

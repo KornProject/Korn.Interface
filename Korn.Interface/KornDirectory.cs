@@ -8,6 +8,6 @@ namespace Korn.Interface
         public const string RootDirectory = KornSharedInternal.RootDirectory,
             LogFile = RootDirectory + "\\" + "log.txt";
 
-        public static IEnumerable<string> GetAllDirectories() => DirectoryEnumeration.Enumerate(RootDirectory, ServiceHub.Directories, Bootstrapper.Directories);
+        public static IEnumerable<string> GetAllDirectories() => DirectoryEnumeration.Enumerate(RootDirectory, Bootstrapper.Directories, ServiceHub.GetAllDirectories());
     }
 }

@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Korn.Shared;
+using Korn.Shared.Internal;
+using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 
@@ -7,14 +9,24 @@ namespace Korn.Interface
     public static class Plugins
     {
         public static readonly string
-            //PluginsListFile = Path.Combine(Service.RootDirectory, "plugins.txt"),
             PluginsDirectory = InjectorService.RootDirectory + "\\" + "Plugins";
 
         public const string PluginManifestFileName = "plugin.manifest";
         public const string PluginVersionFileName = "plugin.version";
-        public const string PluginLogFileName = "plugin.log";
+        public const string PluginLogFileName = "log.txt";
+ 
+        // maybe I don't will use it
+        public static readonly string[] DefaultPluginNames = new string[]
+        {
+            "Yotic.Korn.MainPlugin"
+        };
 
-        public static PluginDirectoryInfo GetDirectoryInfo(string name) => new PluginDirectoryInfo(Path.Combine(PluginsDirectory, name));
+        public static string[] GetAllDirectories() => DefaultPluginNames.SelectMany(name => KornSharedInternal.TargetVersions.Select(version => Path.Combine(PluginsDirectory, name, "bin", version))).ToArray();
+
+        public static string GetDirectoryPath(string name) => Path.Combine(PluginsDirectory, name);
+
+        public static PluginDirectoryInfo GetDirectoryInfo(string name) => new PluginDirectoryInfo(GetDirectoryPath(name));
+
         public static string[] GetPluginsNames() => Directory.GetDirectories(PluginsDirectory).Select(Path.GetFileName).ToArray();
     }
 
@@ -32,7 +44,7 @@ namespace Korn.Interface
 
         public string GetVersion() => HasVersionFile ? File.ReadAllText(VersionFilePath) : "0";
         public void SetVersion(string version) => File.WriteAllText(VersionFilePath, version);
-            
+        
         public bool IsDirectoryExists => Directory.Exists(RootDirectory);
         public bool HasManifestFile => File.Exists(ManifestFilePath);
         public bool HasVersionFile => File.Exists(VersionFilePath);
